@@ -1,12 +1,12 @@
 import excuteQuery from "../../lib/db";
-
+import prisma from "../../lib/prisma";
 export const storeMessage = async ({ name, email, message }) => {
   return excuteQuery({
     query: `INSERT INTO messages(name,email,message) VALUES('${name}','${email}','${message}');`,
   });
 };
 
-function handler(req, res) {
+async function handler(req, res) {
   if (req.method === "POST") {
     const { email, name, message } = req.body;
 
@@ -25,7 +25,11 @@ function handler(req, res) {
 
     const NewMessage = { email, name, message };
     // console.log(NewMessage);
-    storeMessage(NewMessage);
+    // storeMessage(NewMessage);
+    const user = await prisma.messages.create({
+      data: NewMessage,
+    });
+    console.log(user);
     res
       .status(201)
       .json({ message: "Succesfully stored message!", message: NewMessage });
