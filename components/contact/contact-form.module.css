@@ -48,6 +48,10 @@
     margin-top: var(--size-4);
     text-align: right;
   }
+
+  .disabled button{
+     cursor:not-allowed;
+  }
   
   .form button {
     font: inherit;

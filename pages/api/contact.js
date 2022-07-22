@@ -26,13 +26,22 @@ async function handler(req, res) {
     const NewMessage = { email, name, message };
     // console.log(NewMessage);
     // storeMessage(NewMessage);
-    const user = await prisma.messages.create({
-      data: NewMessage,
-    });
-    console.log(user);
-    res
-      .status(201)
-      .json({ message: "Succesfully stored message!", message: NewMessage });
+    try {
+      const user = await prisma.messages.create({
+        data: NewMessage,
+      });
+      console.log(user);
+      res.status(201).json({
+        message: "Succesfully stored the message!",
+        inserterdMessage: NewMessage,
+      });
+    } catch (error) {
+      res.status(500).json({
+        message:
+          "Something went wrong when attempting to connect the database!",
+        error: error,
+      });
+    }
   }
 }
 
