@@ -2,8 +2,9 @@ import classes from "./notification.module.css";
 
 function Notification(props) {
   const { title, message, status } = props;
+  console.log(props);
 
-  let statusClasses = "";
+  let statusClasses = "test";
 
   if (status === "success") {
     statusClasses = classes.success;
