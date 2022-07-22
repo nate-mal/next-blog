@@ -2,9 +2,10 @@ import classes from "./notification.module.css";
 
 function Notification(props) {
   const { title, message, status } = props;
-  console.log(props);
-
-  let statusClasses = "test";
+  if (props.notShowOnPending && status === "pending") {
+    return;
+  }
+  let statusClasses;
 
   if (status === "success") {
     statusClasses = classes.success;

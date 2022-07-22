@@ -29,7 +29,7 @@ function ContactForm() {
       setMessage("");
       const resetContact = setTimeout(() => {
         setRequestStatus(undefined);
-      }, 2000);
+      }, 3000);
       return () => {
         clearTimeout(resetContact);
       };
@@ -77,7 +77,7 @@ function ContactForm() {
     if (notification.status === "pending") {
       actions = (
         <div className={`${classes.actions} ${classes.disabled}`}>
-          <button disabled>Sending</button>
+          <button disabled>Sending...</button>
         </div>
       );
     }
@@ -121,6 +121,7 @@ function ContactForm() {
       </form>
       {notification && (
         <Notification
+          notShowOnPending={true}
           status={notification.status}
           title={notification.title}
           message={notification.message}
